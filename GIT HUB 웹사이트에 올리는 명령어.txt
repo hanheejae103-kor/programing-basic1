@@ -1,0 +1,8 @@
+1. 모든 파일을 스테이징 영역에 추가
+git add .
+
+2. 커밋 메시지 작성
+git commit -m "feat: 4주차 위젯 조합 화면 및 과제 제출 문서 작성"
+
+3. GitHub로 코드 업로드
+git push -u origin main

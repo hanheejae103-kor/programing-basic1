@@ -1,0 +1,6 @@
+ cd .\week2_first_app\
+일단 대상 폴더로 옮김
+
+ flutter run -t ./lib/main4.dart -d chrome
+
+볼드체로 되있는 곳만 바꾸면 됨
