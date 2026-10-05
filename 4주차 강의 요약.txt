@@ -1,0 +1,63 @@
+==================================================
+
+  WEEK 04. WIDGETS AT A GLANCE (위젯으로 화면 조립하기)
+
+==================================================
+
+
+
+1. Flutter 위젯의 기본 개념
+
+- Flutter 화면을 구성하는 모든 요소(보여주기, 배치, 반응/동작)는 '위젯(Widget)'임.
+
+- 위젯 트리의 기본 구조: MaterialApp -> Scaffold -> ListView -> Card -> Text
+
+
+
+2. 주요 위젯 범주 및 대표 위젯
+
+- 화면 틀: Scaffold (기본 뼈대), AppBar (상단 제목/동작)
+
+- 보여주기: Text (글자), Icon (아이콘), Image (이미지), Card (정보 묶음), Container (영역/배경)
+
+- 배치/레이아웃: Row (가로), Column (세로), Stack (겹침), Padding (여백), SizedBox (간격/크기), Expanded (남은 공간 채우기)
+
+- 스크롤: ListView (1차원 목록 스크롤), GridView (2차원 격자 스크롤)
+
+- 입력/상호작용: TextField (텍스트 입력), Checkbox, Switch, Radio, Slider
+
+- 버튼/동작: ElevatedButton, TextButton, IconButton, FloatingActionButton
+
+- 화면 이동: Navigator.push (새 화면), Navigator.pop (이전 화면)
+
+- 피드백: SnackBar (짧은 알림), Tooltip (안내), AlertDialog (팝업), ProgressIndicator (로딩)
+
+
+
+3. 위젯의 상태 (State)
+
+- StatelessWidget: 실행 중 내부 상태 변화가 없는 고정 화면
+
+- StatefulWidget: 사용자 입력이나 동작에 따라 화면이 바뀌는 동적 화면
+
+
+
+4. 디자인 패턴 개요
+
+- 생성 패턴: Singleton (단일 인스턴스 공유), Factory Method (객체 생성 책임 분리)
+
+- 구조 패턴: Decorator (기능을 조합하여 확장)
+
+- 행동 패턴: 객체 간 협력 구조 정의
+
+
+
+5. 실습 및 제출 과제 (AC1~AC3)
+
+- AC1: 머리말 구성 (CircleAvatar + 이름 + 전공)
+
+- AC2: 세로 스크롤 목록 구성 (ListView 내 Card 3개)
+
+- AC3: 버튼 클릭 시 피드백 제공 (SnackBar 출력)
+
+- 검증: flutter analyze 실행 및 Git 커밋 제출

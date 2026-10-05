@@ -1,0 +1,71 @@
+==================================================
+
+  WEEK 03. REQUIREMENTS TO DESIGN (요구사항에서 설계로)
+
+==================================================
+
+
+
+1. 객체지향 프로그래밍 (OOP) 개념
+
+- 클래스(Class), 객체(Object), 메시지(Message)의 관계
+
+- 책임(Responsibility): 데이터와 이를 조작하는 규칙을 같은 객체에 보관 (예: StudyGoal.toggle())
+
+- 상속(Inheritance): 자연스러운 '종류' 관계일 때 사용 (예: Widget <- StatefulWidget)
+
+- 다형성(Polymorphism): 상위 타입(Widget) 계약으로 서로 다른 하위 타입(Text, Icon) 대입
+
+- 캡슐화(Encapsulation): 외부 임의 변경 방지, 불변식 보장, Dart 밑줄(_)로 비공개 범위 설정
+
+- 추상화(Abstraction) & 인터페이스: 구현과 약속(Contract) 분리 (GoalRepository)
+
+- 믹스인(Mixin) & 조합(Composition): 상속 없이 행동 재사용, 상속보다 조합을 우선 고려
+
+
+
+2. 클래식 소프트웨어 설계 원칙
+
+- KISS: 필요 이상으로 복잡하게 만들지 않는다.
+
+- SOLID 원칙:
+
+  * SRP (단일 책임): 변경 이유를 하나로 유지 (화면/검증/저장 분리)
+
+  * OCP (개방-폐쇄): 기존 코드 변경 없이 확장
+
+  * LSP (리스코프 치환): 상위 타입을 하위 타입으로 대체 가능
+
+  * ISP (인터페이스 분리): 작고 명확한 계약
+
+  * DIP (의존성 역전): 핵심 규칙과 구현이 추상 계약에 의존
+
+- DRY: 지식과 규칙의 중복 제거 (단일 권위 기준)
+
+- YAGNI: 미래에 필요할 것 같은 기능은 지금 만들지 않는다.
+
+- 묻지 말고 시켜라 (Tell, Don't Ask): 상태를 꺼내 판단하지 말고 객체에 행동 요청 (`goal.complete()`)
+
+
+
+3. 요구사항 컨텍스트 & 사용자 스토리
+
+- 요구사항 요소: 사용자 목표(Why), 범위/행동(What), 수용조건/증거(Proof)
+
+- 기술 중심이 아닌 사용자 목표 중심 작성 (GOAL FIRST)
+
+- 범위 설정: 포함 범위와 제외 범위를 명확히 구별
+
+- 사용자 스토리: "사용자로서 / 원한다 / 그래서" 구조
+
+- 수용조건 (Acceptance Criteria): Given / When / Then 형태로 판정 가능하게 작성
+
+
+
+4. 실습 및 제출 과제 (StudyGoal Lab)
+
+- 과제 내용: StudyGoal 추가 및 완료 전환 기능 완성 (AC1~AC3)
+
+- 제출물: FEATURE_CONTEXT.md, lib/main.dart, 증거 스크린샷 3장 (ac1-valid, ac2-empty, ac3-complete)
+
+- 완료 조건: `flutter analyze` 통과, AC 재현 증거 연결, Git commit 기록
