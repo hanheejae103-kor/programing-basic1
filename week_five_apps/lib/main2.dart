@@ -35,18 +35,17 @@ class TaskPage extends StatefulWidget {
 }
 
 /// [상태 관리 및 UI 렌더링 클래스]
-/// - 상태 소유자: _TaskPageState
 class _TaskPageState extends State<TaskPage> {
-  // [AC1] 원본 상태: 초기값 정의 ([false, false])
+  // [AC1] 원본 상태
   final List<TaskItem> _tasks = [
     TaskItem(title: '5주차 강의 복습'),
     TaskItem(title: '상태 흐름도 작성'),
   ];
 
-  // [AC4] 계산된 상태: 원본 상태(_tasks)에서 상태를 직접 계산 (중복 저장 X)
+  // [AC4] 원본 상태(_tasks)에서 상태를 직접 계산 (중복 저장 X)
   int get _remainingCount => _tasks.where((task) => !task.isDone).length;
 
-  // [AC2, AC3] 이벤트 처리 함수: 입력에 응답하여 상태와 UI 동시 변경 및 원복
+  // [AC2, AC3] 클릭 시 완료/취소 상태 토글 및 화면 갱신
   void _toggleTask(int index) {
     setState(() {
       _tasks[index].isDone = !_tasks[index].isDone;
@@ -95,7 +94,7 @@ class _TaskPageState extends State<TaskPage> {
               const Divider(color: Color(0xFFE2E8F0)),
               const SizedBox(height: 16),
 
-              // [AC1, AC2, AC3] 남은 할 일 수 표시
+              // 남은 할 일 수 표시 영역
               Row(
                 children: [
                   const Text(
@@ -118,7 +117,7 @@ class _TaskPageState extends State<TaskPage> {
               ),
               const SizedBox(height: 20),
 
-              // [AC2, AC3] 할 일 목록 및 토글 버튼
+              // 할 일 목록 (카드 전체 클릭 가능)
               ListView.separated(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
@@ -127,72 +126,85 @@ class _TaskPageState extends State<TaskPage> {
                     const SizedBox(height: 12),
                 itemBuilder: (context, index) {
                   final task = _tasks[index];
-                  return Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 12,
-                    ),
-                    decoration: BoxDecoration(
-                      color: task.isDone
-                          ? const Color(0xFFECFDF5)
-                          : Colors.white,
+
+                  // 카드 위젯 전체를 InkWell로 감싸 터치 영역 확장
+                  return Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      onTap: () => _toggleTask(index), // 카드 어디를 눌러도 상태 변경!
                       borderRadius: BorderRadius.circular(16),
-                      border: Border.all(
-                        color: task.isDone
-                            ? const Color(0xFFA7F3D0)
-                            : const Color(0xFFE2E8F0),
-                        width: 1.5,
-                      ),
-                    ),
-                    child: Row(
-                      children: [
-                        Icon(
-                          task.isDone
-                              ? Icons.check_rounded
-                              : Icons.radio_button_unchecked,
-                          color: task.isDone
-                              ? const Color(0xFF0D9488)
-                              : const Color(0xFF64748B),
-                          size: 20,
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 200),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 14,
                         ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: Text(
-                            task.title,
-                            style: const TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xFF1E293B),
-                            ),
+                        decoration: BoxDecoration(
+                          color: task.isDone
+                              ? const Color(0xFFECFDF5) // 완료 시 연한 녹색 배경
+                              : Colors.white, // 미완료 시 흰색
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(
+                            color: task.isDone
+                                ? const Color(0xFFA7F3D0) // 완료 시 녹색 테두리
+                                : const Color(0xFFE2E8F0),
+                            width: 1.5,
                           ),
                         ),
-                        InkWell(
-                          onTap: () => _toggleTask(index),
-                          borderRadius: BorderRadius.circular(8),
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 12,
-                              vertical: 6,
-                            ),
-                            decoration: BoxDecoration(
+                        child: Row(
+                          children: [
+                            // 1. 동그라미 / 체크 아이콘 (클릭 반응)
+                            Icon(
+                              task.isDone
+                                  ? Icons.check_circle_rounded
+                                  : Icons.radio_button_unchecked,
                               color: task.isDone
-                                  ? const Color(0xFFCCFBF1)
-                                  : const Color(0xFFF1F5F9),
-                              borderRadius: BorderRadius.circular(8),
+                                  ? const Color(0xFF0D9488)
+                                  : const Color(0xFF94A3B8),
+                              size: 22,
                             ),
-                            child: Text(
-                              task.isDone ? '취소' : '완료',
-                              style: TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.bold,
-                                color: task.isDone
-                                    ? const Color(0xFF0F766E)
-                                    : const Color(0xFF64748B),
+                            const SizedBox(width: 12),
+
+                            // 2. 할 일 제목
+                            Expanded(
+                              child: Text(
+                                task.title,
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w600,
+                                  color: task.isDone
+                                      ? const Color(0xFF0F766E)
+                                      : const Color(0xFF1E293B),
+                                ),
                               ),
                             ),
-                          ),
+
+                            // 3. 우측 상태 뱃지 (시각적 상태 표시용)
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 4,
+                              ),
+                              decoration: BoxDecoration(
+                                color: task.isDone
+                                    ? const Color(0xFFCCFBF1)
+                                    : const Color(0xFFF1F5F9),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Text(
+                                task.isDone ? '취소' : '완료',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                  color: task.isDone
+                                      ? const Color(0xFF0F766E)
+                                      : const Color(0xFF64748B),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
                   );
                 },
