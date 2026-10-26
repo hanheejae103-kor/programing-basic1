@@ -6,3 +6,6 @@
  flutter run -t ./lib/"main.dart" -d chrome
 
 ""로 돼있는 곳만 바꾸면 됨
+
+-t 는 타겟
+-d는 디바이스
